@@ -6,7 +6,7 @@
        Paired with ROS 2 Humble via gazebo_ros_pkgs.
        ============================================================ -->
 
-  <!-- ---- Visual materials in Gazebo ---- -->
+  <!-- Visual materials in Gazebo -->
   <gazebo reference="base_link"><material>Gazebo/Grey</material></gazebo>
   <gazebo reference="fl_wheel_link"><material>Gazebo/Black</material></gazebo>
   <gazebo reference="fr_wheel_link"><material>Gazebo/Black</material></gazebo>
