@@ -2,9 +2,6 @@
 
 An omni-wheeled mobile robot for autonomous navigation.
 
-**Real robot target:** Raspberry Pi 4B (brain) · Arduino UNO (motor MCU) ·
-Pi Camera 3 · GY-9250 9DOF IMU · Mecanum wheels · 6400 mAh LiPo.
-
 ## What it does
 
 - **Simulates** the bot in a 6×6 m walled test arena in Gazebo.
