@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- ============================================================
+       IMU — models the GY-9250 (MPU-9250) 9DOF module
+       ============================================================ -->
+  <xacro:macro name="imu_sensor" params="parent xyz">
+    <link name="imu_link">
+      <visual>
+        <geometry><box size="0.02 0.015 0.004"/></geometry>
+        <material name="blue"/>
+      </visual>
+      <collision>
+        <geometry><box size="0.02 0.015 0.004"/></geometry>
+      </collision>
+      <inertial>
+        <mass value="0.01"/>
+        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+      </inertial>
+    </link>
+    <joint name="imu_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child link="imu_link"/>
+      <origin xyz="${xyz}" rpy="0 0 0"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- ============================================================
+       Camera — models the Raspberry Pi Camera Module 3
+       ============================================================ -->
+  <xacro:macro name="camera_sensor" params="parent xyz">
+    <link name="camera_link">
+      <visual>
+        <geometry><box size="0.010 0.025 0.024"/></geometry>
+        <material name="black"/>
+      </visual>
+      <collision>
+        <geometry><box size="0.010 0.025 0.024"/></geometry>
+      </collision>
+      <inertial>
+        <mass value="0.01"/>
+        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+      </inertial>
+    </link>
+    <joint name="camera_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child link="camera_link"/>
+      <origin xyz="${xyz}" rpy="0 0 0"/>
+    </joint>
+
+    <!-- optical frame (REP-103: z forward, x right, y down) -->
+    <link name="camera_optical_link"/>
+    <joint name="camera_optical_joint" type="fixed">
+      <parent link="camera_link"/>
+      <child link="camera_optical_link"/>
+      <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- ============================================================
+       2D Lidar — SIMULATION ONLY.
+       The physical bot has no lidar; Nav2 + AMCL need a /scan source.
+       On real hardware, add a lidar or convert the Pi Camera depth
+       image to a LaserScan (depthimage_to_laserscan).
+       ============================================================ -->
+  <xacro:macro name="lidar_sensor" params="parent xyz">
+    <link name="lidar_link">
+      <visual>
+        <geometry><cylinder radius="0.035" length="0.04"/></geometry>
+        <material name="orange"/>
+      </visual>
+      <collision>
+        <geometry><cylinder radius="0.035" length="0.04"/></geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <inertia ixx="1e-4" ixy="0" ixz="0" iyy="1e-4" iyz="0" izz="1e-4"/>
+      </inertial>
+    </link>
+    <joint name="lidar_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child link="lidar_link"/>
+      <origin xyz="${xyz}" rpy="0 0 0"/>
+    </joint>
+  </xacro:macro>
+
+</robot>
