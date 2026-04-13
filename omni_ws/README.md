@@ -1,11 +1,9 @@
-# Omni-Bot — ROS 2 Humble MVP
+# Omni-Bot
 
-An omni-wheeled (mecanum) mobile robot for autonomous navigation. This
-workspace is the **MVP**: a fully simulatable stack in **Gazebo Classic** plus
-**hardware bringup stubs** for the real robot.
+An omni-wheeled mobile robot for autonomous navigation.
 
 **Real robot target:** Raspberry Pi 4B (brain) · Arduino UNO (motor MCU) ·
-Pi Camera 3 · GY-9250 9DOF IMU · mecanum wheels · 6400 mAh LiPo.
+Pi Camera 3 · GY-9250 9DOF IMU · Mecanum wheels · 6400 mAh LiPo.
 
 ## What it does
 
@@ -27,7 +25,7 @@ Pi Camera 3 · GY-9250 9DOF IMU · mecanum wheels · 6400 mAh LiPo.
 | `omni_bringup` | Top-level launch: full sim+nav demo, and teleop |
 
 > **Note on the lidar:** the physical robot has no lidar, but Nav2 + AMCL need a
-> `/scan`. A 2D lidar is added **in simulation only** (see `sensors.xacro`). On
+> `/scan`. A 2D lidar is added **in simulation only** (`sensors.xacro`). On
 > real hardware, add a lidar driver in `hardware.launch.py`, or convert the Pi
 > Camera depth image to a `LaserScan` with `depthimage_to_laserscan`.
 
@@ -58,7 +56,7 @@ source install/setup.bash
 
 ## Run
 
-### 1. Full demo — simulation + map + AMCL + Nav2 (one command)
+### 1. Full demo — simulation + map + AMCL + Nav2
 
 ```bash
 ros2 launch omni_bringup sim_navigation.launch.py
@@ -71,9 +69,9 @@ Gazebo and RViz open. In **RViz**:
 2. Click **Nav2 Goal** and pick a destination — the bot plans and drives there
    autonomously, avoiding the two interior obstacles.
 
-### 2. Manual terminal control (teleop)
+### 2. Teleop Control
 
-In a **separate terminal** (needs keyboard focus):
+In a seperate terminal;
 
 ```bash
 source install/setup.bash
@@ -107,7 +105,7 @@ Drive around with teleop while running `slam_toolbox`, then
 `ros2 run nav2_map_server map_saver_cli -f my_map`, and point
 `omni_navigation` at the new `my_map.yaml`.
 
-## Topics (quick reference)
+## Topics used
 
 | Topic | Type | Direction |
 |---|---|---|
@@ -118,3 +116,5 @@ Drive around with teleop while running `slam_toolbox`, then
 | `/pi_camera/image_raw` | `sensor_msgs/Image` | out |
 | `/map` | `nav_msgs/OccupancyGrid` | out (map_server) |
 | `/goal_pose` | `geometry_msgs/PoseStamped` | in (RViz Nav2 Goal) |
+
+---
