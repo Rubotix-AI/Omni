@@ -1,4 +1,4 @@
-build/
+omni_ws/build/
 install/
 log/
 __pycache__/
