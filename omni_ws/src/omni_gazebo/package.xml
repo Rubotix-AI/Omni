@@ -3,14 +3,15 @@
 <package format="3">
   <name>omni_gazebo</name>
   <version>0.1.0</version>
-  <description>Gazebo Classic simulation (world + spawn) for the omni-wheeled robot.</description>
+  <description>Gazebo Sim (Fortress) simulation (world + spawn + bridge) for the omni-wheeled robot.</description>
   <maintainer email="machirajus7@gmail.com">Machiraju</maintainer>
   <license>MIT</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
   <exec_depend>omni_description</exec_depend>
-  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>ros_gz_sim</exec_depend>
+  <exec_depend>ros_gz_bridge</exec_depend>
   <exec_depend>robot_state_publisher</exec_depend>
   <exec_depend>xacro</exec_depend>
 

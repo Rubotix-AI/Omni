@@ -29,10 +29,10 @@ def generate_launch_description():
         launch_arguments={'use_sim_time': 'true'}.items(),
     )
 
-    # Give Gazebo a few seconds to start publishing /clock, /scan and /odom
-    # before Nav2 + AMCL come up.
+    # Give Gazebo Sim + the ros_gz bridges time to start publishing /clock,
+    # /scan and /odom before Nav2 + AMCL come up.
     navigation = TimerAction(
-        period=8.0,
+        period=12.0,
         actions=[IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
                 os.path.join(pkg_nav, 'launch', 'navigation.launch.py')),

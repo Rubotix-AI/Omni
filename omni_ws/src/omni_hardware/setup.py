@@ -21,7 +21,6 @@ setup(
     maintainer_email='machirajus7@gmail.com',
     description='Hardware bringup stubs for the omni robot.',
     license='MIT',
-    tests_require=['pytest'],
     entry_points={
         'console_scripts': [
             'arduino_bridge = omni_hardware.arduino_bridge:main',

@@ -13,6 +13,7 @@ import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
@@ -40,6 +41,9 @@ def generate_launch_description():
             'params_file': params_file,
             'slam': 'False',
             'autostart': 'True',
+            # Launch each Nav2 node as its own process instead of a composed
+            # container — far more robust on macOS/RoboStack and easier to debug.
+            'use_composition': 'False',
         }.items(),
     )
 
@@ -48,7 +52,7 @@ def generate_launch_description():
         executable='rviz2',
         arguments=['-d', default_rviz],
         parameters=[{'use_sim_time': use_sim_time}],
-        condition=None,
+        condition=IfCondition(use_rviz),
         output='screen',
     )
 

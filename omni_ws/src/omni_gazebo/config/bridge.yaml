@@ -1,0 +1,33 @@
+# ============================================================
+# ros_gz_bridge core topic map (Gazebo Sim <-> ROS 2).
+# Sensor topics (scan/imu/camera) are bridged separately in the
+# launch file so each can set override_frame_id to match the URDF.
+# ============================================================
+
+# Simulation clock -> ROS (drives use_sim_time across the stack)
+- ros_topic_name: "/clock"
+  gz_topic_name: "/clock"
+  ros_type_name: "rosgraph_msgs/msg/Clock"
+  gz_type_name: "gz.msgs.Clock"
+  direction: GZ_TO_ROS
+
+# Velocity command: ROS -> Gazebo (VelocityControl, holonomic body twist)
+- ros_topic_name: "/cmd_vel"
+  gz_topic_name: "/cmd_vel"
+  ros_type_name: "geometry_msgs/msg/Twist"
+  gz_type_name: "gz.msgs.Twist"
+  direction: ROS_TO_GZ
+
+# Wheel odometry: Gazebo -> ROS
+- ros_topic_name: "/odom"
+  gz_topic_name: "/model/omni_bot/odometry"
+  ros_type_name: "nav_msgs/msg/Odometry"
+  gz_type_name: "gz.msgs.Odometry"
+  direction: GZ_TO_ROS
+
+# odom -> base_footprint transform: Gazebo -> ROS /tf
+- ros_topic_name: "/tf"
+  gz_topic_name: "/model/omni_bot/tf"
+  ros_type_name: "tf2_msgs/msg/TFMessage"
+  gz_type_name: "gz.msgs.Pose_V"
+  direction: GZ_TO_ROS
